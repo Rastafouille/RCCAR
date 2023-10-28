@@ -1,3 +1,6 @@
 # RCCAR
 ROS RCCAR
-test
+
+
+vesc package
+https://github.com/f1tenth/vesc
