@@ -2,11 +2,10 @@
 <!-- RC Car LAUNCH -->
 <launch>
 
- 
   <!-- group for racecar -->
   <group ns="racecar">
   <!-- Open the model file -->
-  <arg name="racecar_xacro" default="$(find rccar)/description/racecar.xacro"/>
+  <arg name="racecar_xacro" default="$(find rccar)/description/racecar_fixed_wheel.xacro"/>
   <!--<param name="tf_prefix" value="racecar"/>-->
   <param name="robot_description" command="xacro --inorder '$(arg racecar_xacro)'"/>
   <!-- Add the transformations -->
@@ -17,13 +16,11 @@
        default="$(find rccar)/config/vesc.yaml" />
   <rosparam file="$(arg sensors_config)" command="load" />
 
-
 <!-- Start urg_node on rover-explorer -->
   <node name="urg_node" pkg="urg_node" type="urg_node">
     <param name="ip_address" value="10.42.0.18"/>
     <param name="range_min" value="0.25"/>
      </node>
-
 
 
 <!-- Start openni2_launch on rover-explorer -->
@@ -57,7 +54,4 @@
   <!-- Launch the zed M -->
   <!--<include file="$(find zed_wrapper)/launch/zedm.launch"/> -->
 
-  
-  
-  
 </launch>

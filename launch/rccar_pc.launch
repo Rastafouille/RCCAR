@@ -5,5 +5,5 @@
 
   
   <!-- Launch RVIZ -->
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(rccar)/launch/rviz.rviz" output="screen"/>
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rccar)/launch/rviz.rviz" output="screen"/>
 </launch>
