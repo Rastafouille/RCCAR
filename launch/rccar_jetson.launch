@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<!-- RC Car LAUNCH -->
+<launch>
+
+
+<arg name="sensors_config"
+       default="$(find rccar)/config/vesc.yaml" />
+  <rosparam file="$(arg sensors_config)" command="load" />
+
+
+<!-- Start urg_node on rover-explorer -->
+<!--  <node name="urg_node" pkg="urg_node" type="urg_node">
+    <param name="ip_address" value="10.42.0.18"/>
+    <param name="range_min" value="0.25"/>
+     </node>
+-->
+
+
+<!-- Start openni2_launch on rover-explorer -->
+
+<!--  <include file="$(find openni2_launch)/launch/openni2.launch" >
+    <arg name="publish_tf" value="true" />
+    <arg name="depth_registration" value="true" />
+  </include>	-->
+
+  
+  <arg name="node_name" default="vesc_driver_node" />
+  <!-- Optionally launch in GDB, for debugging -->
+  <arg name="debug" default="false" />
+  <arg if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args" />
+  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+
+  <!-- VESC driver parameters -->
+  <arg name="port" default="/dev/ttyACM0" />
+
+  <!-- VESC driver node -->
+  <node pkg="vesc_driver" type="vesc_driver_node" name="$(arg node_name)"
+        output="screen" launch-prefix="$(arg launch_prefix)" >
+    <param name="port" value="$(arg port)" />
+  </node>
+
+ <!-- Ackermann to VESC node -->
+  <node pkg="vesc_ackermann" type="ackermann_to_vesc_node" name="ackermann_to_vesc_node"
+        output="screen" launch-prefix="$(arg launch_prefix)" >
+  </node>
+</launch>
