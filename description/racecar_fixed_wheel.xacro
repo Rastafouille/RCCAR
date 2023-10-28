@@ -79,18 +79,12 @@
     </visual>
   </link>
 
-  <joint name="base_to_front_left_hinge" type="fixed">
+  <joint name="base_to_front_left_wheel" type="fixed">
     <parent link="base_link"/>
-    <child link="front_left_hinge"/>
+    <child link="front_left_wheel"/>
     <origin xyz="${wheelbase} ${(wheel_length+width)/2} ${wheel_radius}"/>
   </joint>
 
-  <link name="front_left_hinge"/>
-
-  <joint name="front_left_hinge_to_wheel" type="continuous">
-    <parent link="front_left_hinge"/>
-    <child link="front_left_wheel"/>
-  </joint>
 
   <link name="front_left_wheel">
     <visual>
@@ -102,17 +96,10 @@
     </visual>
   </link>
 
-  <joint name="base_to_front_right_hinge" type="fixed">
+  <joint name="base_to_front_right_wheel" type="fixed">
     <parent link="base_link"/>
-    <child link="front_right_hinge"/>
-    <origin xyz="${wheelbase} ${-(wheel_length+width)/2} ${wheel_radius}"/>
-  </joint>
-
-  <link name="front_right_hinge"/>
-
-  <joint name="front_right_hinge_to_wheel" type="continuous">
-    <parent link="front_right_hinge"/>
     <child link="front_right_wheel"/>
+    <origin xyz="${wheelbase} ${-(wheel_length+width)/2} ${wheel_radius}"/>
   </joint>
 
   <link name="front_right_wheel">
