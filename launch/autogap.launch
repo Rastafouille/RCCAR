@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  
+    <!-- Autodrive Gap algo -->
+  <node pkg="rccar" name="auto_gap" type="AutoGap2.py">
+  	<rosparam command="load" file="$(find rccar)/config/autogap.yaml"/>
+  </node>
+  
+</launch>

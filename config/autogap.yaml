@@ -1,9 +1,9 @@
 # vitesse maxAckermann        
-max_speed: 7
+max_speed: 1
 # distance a partir de laquelle on ralentie
 dist_critique: 5
 # distance a garder avec les obstacles
-dist_secu: 
+dist_secu: 0.5
 
 #Valeur max et min du laser pour le calcul de la distance max*
 min_id: 212
@@ -11,3 +11,6 @@ max_id: 812
         
 max_steer: 1.57
 
+
+# Joystick indices for toggling mux
+auto_button_idx: 5 # R1 button  

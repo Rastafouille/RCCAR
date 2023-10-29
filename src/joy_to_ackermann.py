@@ -24,7 +24,6 @@ class joy_to_ackermann:
         self.joy_max_angle=rospy.get_param("/joy_to_ackermann/joy_max_angle")
         
         self.joy_button_idx=rospy.get_param("/joy_to_ackermann/joy_button_idx")
-        self.auto_button_idx=rospy.get_param("/joy_to_ackermann/auto_button_idx")
         
         self.drive=AckermannDriveStamped()
 

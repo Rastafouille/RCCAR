@@ -14,7 +14,7 @@ import time
 
 from geometry_msgs.msg import Twist, Point32
 from visualization_msgs.msg import Marker
-from sensor_msgs.msg import LaserScan, PointCloud, ChannelFloat32
+from sensor_msgs.msg import LaserScan, PointCloud, ChannelFloat32, Joy
 from ackermann_msgs.msg import AckermannDriveStamped, AckermannDrive
 
 
@@ -22,20 +22,19 @@ from ackermann_msgs.msg import AckermannDriveStamped, AckermannDrive
 class autogap:
     def __init__(self):
         rospy.init_node('AutoGap_node')
-        self.drive_pub = rospy.Publisher('/drive', AckermannDriveStamped)
-        self.marker_pub = rospy.Publisher("/test_marker", Marker, queue_size = 1)
-        self.marker2_pub = rospy.Publisher("/collision_marker", Marker, queue_size = 1)
+       
+        #rospy.Subscriber('/joy', Joy, self.JoyCallback, queue_size = 1)
 
-        #rospy.Subscriber("/test_marker", Marker, queue_size = 2)
         rospy.Subscriber('/scan', LaserScan, self.LaserScanCallback, queue_size = 1)
         self.listener = tf.TransformListener()
 
-        self.MAX_SPEED=7
-        self.DIST_CRITIQUE=5
-        self.DIST_SECU=0.7
-        self.MAX_STEER=1.57
-        self.MIN_ID=212
-        self.MAX_ID=812
+        
+        self.MAX_SPEED=rospy.get_param("/auto_gap/max_speed")
+        self.DIST_CRITIQUE=rospy.get_param("/auto_gap/dist_critique")
+        self.DIST_SECU=rospy.get_param("/auto_gap/dist_secu")
+        self.MAX_STEER=rospy.get_param("/auto_gap/max_steer")
+        self.MIN_ID=rospy.get_param("/auto_gap/min_id")
+        self.MAX_ID=rospy.get_param("/auto_gap/max_id")
 
         self.marker = Marker()
 
@@ -98,13 +97,7 @@ class autogap:
         self.marker2.pose.orientation.w = 1.0
 
 
-
-
-
-
-
         self.drive=AckermannDriveStamped()
-        self.pcl_pub = rospy.Publisher("/pcl", PointCloud, queue_size = 1)
         self.pcl_msg = PointCloud()
         self.pcl_msg.header.frame_id = "map"
         self.point=Point32()
@@ -114,7 +107,10 @@ class autogap:
         # g_channel = ChannelFloat32(name="g", values=[0xff])
         # b_channel = ChannelFloat32(name="b", values=[0xff])
         # self.pcl_msg.channels = (ch_int, ch_rgb, r_channel, g_channel, b_channel)
-
+        self.drive_pub = rospy.Publisher('/drive', AckermannDriveStamped,queue_size = 1)
+        self.marker_pub = rospy.Publisher("/test_marker", Marker, queue_size = 1)
+        self.marker2_pub = rospy.Publisher("/collision_marker", Marker, queue_size = 1)
+        self.pcl_pub = rospy.Publisher("/pcl", PointCloud, queue_size = 1)
 
     def rgb(self,minimum, maximum, value):
         minimum, maximum = float(minimum), float(maximum)
@@ -225,11 +221,6 @@ class autogap:
         self.marker_pub.publish(self.marker)
 
 
-
-
-
-
-
             
         self.drive.header.stamp = rospy.Time.now()
         self.drive.drive.steering_angle=max_angle
@@ -246,7 +237,6 @@ class autogap:
             self.angle_increment= data.angle_increment
             self.angle_min=data.angle_min
             self.traitement()
-
 
 
 

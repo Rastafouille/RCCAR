@@ -6,4 +6,4 @@ joy_max_angle: 1. # meters/second
 
 # Joystick indices for toggling mux
 joy_button_idx: 4  # L1 button
-auto_button_idx: 5 # R1 button  
+
