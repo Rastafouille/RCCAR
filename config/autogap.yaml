@@ -1,0 +1,13 @@
+# vitesse maxAckermann        
+max_speed: 7
+# distance a partir de laquelle on ralentie
+dist_critique: 5
+# distance a garder avec les obstacles
+dist_secu: 
+
+#Valeur max et min du laser pour le calcul de la distance max*
+min_id: 212
+max_id: 812
+        
+max_steer: 1.57
+
