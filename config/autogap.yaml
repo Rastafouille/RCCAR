@@ -1,15 +1,14 @@
-# vitesse maxAckermann        
-max_speed: 1
-# distance a partir de laquelle on ralentie
-dist_critique: 5
-# distance a garder avec les obstacles
-dist_secu: 0.5
+max_speed: 5 # vitesse maxAckermann  
+max_steer: 1.57      
+dist_critique: 5 #berlin:5 TRR:3 # distance avant de commencer a ralentir
+dist_secu: 0.5 #distance des obstacles
 
-#Valeur max et min du laser pour le calcul de la distance max*
+#Valeur max et min du laser pour le calcul de la distance max
 min_id: 212
 max_id: 812
         
-max_steer: 1.57
+id_decalage: 50 #berlin:50 decalage si obstacles
+distance_obst: 0.5 #berlin:5 TRR:1.5 #rayon des points pris en compte pour le calcul obstacle
 
 
 # Joystick indices for toggling mux
