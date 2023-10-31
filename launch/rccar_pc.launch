@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <launch>
+
+
+<!-- script pour ouvrir la page web du stream motion-->
+<node pkg="rccar" type="pc.sh" name="pc_script" output="screen" />
+
   <!-- Listen to messages from joysicks -->
   <node pkg="joy" name="joy_node" type="joy_node"/>
 

@@ -22,14 +22,6 @@
     <param name="range_min" value="0.25"/>
      </node>
 
-
-<!-- Start openni2_launch on rover-explorer -->
-
-<!--  <include file="$(find openni2_launch)/launch/openni2.launch" >
-    <arg name="publish_tf" value="true" />
-    <arg name="depth_registration" value="true" />
-  </include>	-->
-
   
   <arg name="node_name" default="vesc_driver_node" />
   <!-- Optionally launch in GDB, for debugging -->
@@ -51,7 +43,9 @@
         output="screen" launch-prefix="$(arg launch_prefix)" >
   </node>
   
-  <!-- Launch the zed M -->
-  <!--<include file="$(find zed_wrapper)/launch/zedm.launch"/> -->
+ <!-- VESC to Odom node -->
+  <node pkg="vesc_ackermann" type="vesc_to_odom_node" name="vesc_to_odom_node"
+        output="screen" launch-prefix="$(arg launch_prefix)" >
+  </node>
 
 </launch>
