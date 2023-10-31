@@ -267,7 +267,7 @@ class autogap:
         self.marker_cible_pub.publish(self.marker_cible)
 
         self.drive.header.stamp = rospy.Time.now()
-        self.drive.drive.steering_angle=max_angle/2
+        self.drive.drive.steering_angle=max_angle*2
         self.drive.drive.speed=self.CalculVitesse(max_angle,self.ranges[max_id])
         self.drive_pub.publish(self.drive)
 

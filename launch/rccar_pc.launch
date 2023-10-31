@@ -9,9 +9,9 @@
   </node>
   
     <!-- Autodrive Gap algo -->
-  <node pkg="rccar" name="auto_gap" type="AutoGap2.py">
+  <!--<node pkg="rccar" name="auto_gap" type="autogap.py">
   	<rosparam command="load" file="$(find rccar)/config/autogap.yaml"/>
-  </node>
+  </node> -->
   
   <!-- Launch RVIZ -->
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rccar)/launch/rviz.rviz" output="screen"/>
