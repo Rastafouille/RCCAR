@@ -17,7 +17,7 @@ max_acceleration: 1.0 # meters/second^2
 throttle_smoother_rate: 75.0 # messages/sec
 
 # servo value (0 to 1) =  steering_angle_to_servo_gain * steering angle (radians) + steering_angle_to_servo_offset
-steering_angle_to_servo_gain: 1.2135
+steering_angle_to_servo_gain: 0.3
 steering_angle_to_servo_offset: 0.50
 
 # publish odom to base link tf
@@ -38,5 +38,5 @@ vesc_driver:
   speed_max: 6000
   position_min: 0.0
   position_max: 0.0
-  servo_min: 0.05
-  servo_max: 0.95
+  servo_min: 0.10
+  servo_max: 0.90
