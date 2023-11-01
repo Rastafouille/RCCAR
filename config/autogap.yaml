@@ -4,8 +4,8 @@ dist_critique: 5 #berlin:5 TRR:3 # distance avant de commencer a ralentir
 dist_secu: 0.3 #distance des obstacles
 
 #Valeur max et min du laser pour le calcul de la distance max
-min_id: 212
-max_id: 812
+min_id: 112
+max_id: 912
         
 id_decalage: 150 #berlin:50 decalage si obstacles
 distance_obst: 5 #berlin:5 TRR:1.5 #rayon des points pris en compte pour le calcul obstacle

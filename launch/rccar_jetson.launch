@@ -3,9 +3,9 @@
 <launch>
 
 
-<!-- script pour ouvrir la page web du stream motion-->
+<!-- script pour ouvrir la page web du stream motion 
 <node pkg="rccar" type="jetson.sh" name="jetson_script" output="screen" />
-
+-->
 
   <!-- group for racecar -->
   <group ns="racecar">
