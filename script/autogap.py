@@ -198,7 +198,7 @@ class autogap:
     def RadianToServo(self,angle):
         if angle>0.75: servo=1
         elif angle <-0.75: servo=-1
-        else: servo = angle*1.33
+        else: servo = angle*1.5
 
         #print('servo=',servo)
         return servo
@@ -229,7 +229,7 @@ class autogap:
         min_id=0
         dist=0
         #for i in range(self.MIN_ID, self.MAX_ID):
-        for i in range(max_id-250, max_id+250):
+        for i in range(max_id-100, max_id+100):
 
             dist=0
             ##### A OPTIMISER AVEC NP
