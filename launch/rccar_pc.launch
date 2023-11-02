@@ -18,6 +18,17 @@
   	<rosparam command="load" file="$(find rccar)/config/autogap.yaml"/>
   </node> -->
   
+  <node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
+  <param name="scan" value="scan" />
+   </node>
+  
+  
+  
+
+  
+  
+  
+  
   <!-- Launch RVIZ -->
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rccar)/launch/rviz.rviz" output="screen"/>
 </launch>
