@@ -3,9 +3,8 @@
 <launch>
 
 
-<!-- script pour ouvrir la page web du stream motion 
+<!-- script pour ouvrir la page web du stream motion -->
 <node pkg="rccar" type="jetson.sh" name="jetson_script" output="screen" />
--->
 
   <!-- group for racecar -->
   <group ns="racecar">
@@ -52,5 +51,9 @@
   <node pkg="vesc_ackermann" type="vesc_to_odom_node" name="vesc_to_odom_node"
         output="screen" launch-prefix="$(arg launch_prefix)" >
   </node>
+  
+<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen">
+
+<node pkg="rccar" name="odometry_publisher_node" type="tf_odom.py" output="screen">
 
 </launch>
