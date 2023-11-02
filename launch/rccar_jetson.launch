@@ -52,8 +52,8 @@
         output="screen" launch-prefix="$(arg launch_prefix)" >
   </node>
   
-<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen">
+<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen"></node>
 
-<node pkg="rccar" name="odometry_publisher_node" type="tf_odom.py" output="screen">
+<node pkg="rccar" name="odometry_publisher_node" type="tf_odom.py" output="screen"> </node>
 
 </launch>
