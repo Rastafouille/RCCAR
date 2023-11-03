@@ -22,5 +22,5 @@ imu0_remove_gravitational_acceleration: false
 odom0_differential: false
 imu0_diffrential: false
 
-odom0_queue_size: 1
-imu0_queue_size: 1
+odom0_queue_size: 10
+imu0_queue_size: 10

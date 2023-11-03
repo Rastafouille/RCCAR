@@ -1,28 +1,24 @@
 <?xml version="1.0"?>
 <launch>
 
-
 <!-- script pour ouvrir la page web du stream motion
 <node pkg="rccar" type="pc.sh" name="pc_script" output="screen" />-->
 
-  <!-- Listen to messages from joysicks -->
-  <node pkg="joy" name="joy_node" type="joy_node"/>
+<!-- Joysicks -->
+	<node pkg="joy" name="joy_node" type="joy_node"/>
 
-  <!-- transform joy to ackermann /drive -->
-  <node pkg="rccar" name="joy_to_ackermann" type="joy_to_ackermann.py">
-  	<rosparam command="load" file="$(find rccar)/config/joy_to_ackermann.yaml"/>
-  </node>
-  
-    <!-- Autodrive Gap algo -->
+<!-- Joy to ackermann /drive -->
+	<node pkg="rccar" name="joy_to_ackermann" type="joy_to_ackermann.py">
+  		<rosparam command="load" file="$(find rccar)/config/joy_to_ackermann.yaml"/>
+	</node>
+	
+<!-- RVIZ -->
+	<node pkg="rviz" type="rviz" name="rviz" args="-d $(find rccar)/launch/rviz.rviz" output="screen"/>
+	
+<!-- Autodrive Gap algo -->
   <!--<node pkg="rccar" name="auto_gap" type="autogap.py">
   	<rosparam command="load" file="$(find rccar)/config/autogap.yaml"/>
   </node> -->
-  
-  <!--<node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
-  <param name="scan" value="scan" />
-   </node>-->
-  
-  
-  <!-- Launch RVIZ -->
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rccar)/launch/rviz.rviz" output="screen"/>
+    
+
 </launch>
