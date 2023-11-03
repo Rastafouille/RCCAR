@@ -47,10 +47,10 @@
         output="screen" launch-prefix="$(arg launch_prefix)" >
   </node>
   
- <!-- VESC to Odom node -->
+ <!-- VESC to Odom node 
   <node pkg="vesc_ackermann" type="vesc_to_odom_node" name="vesc_to_odom_node"
         output="screen" launch-prefix="$(arg launch_prefix)" >
-  </node>
+  </node> -->
   
 <node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen"></node>
 
