@@ -29,13 +29,13 @@ class vesc_to_odom:
 		self.y=0
 		self.theta=0
 		self.odom=Odometry()
-		self.odom.header.frame_id='odom'
+		self.odom.header.frame_id='vesc_odom'
 		self.odom.child_frame_id='base_link'
 
 		self.last_state=VescStateStamped()
 		self.last_time=rospy.Time.now()
 
-		self.odom_pub = rospy.Publisher("odom", Odometry, queue_size=1)
+		self.odom_pub = rospy.Publisher("vesc_odom", Odometry, queue_size=1)
 		rospy.Subscriber('/sensors/core', VescStateStamped,self.StateCallback,queue_size=1)
 		rospy.Subscriber('/sensors/servo_position_command', Float64,self.ServoCallback,queue_size=1)
 		
@@ -89,7 +89,7 @@ class vesc_to_odom:
 		# self.odom.twist.twist.angular.z = current_angular_velocity
 
 		odom_quat = tf.transformations.quaternion_from_euler(0, 0, self.theta)
-		#self.odom_broadcaster.sendTransform((self.odom.pose.pose.position.x, self.odom.pose.pose.position.y, 0.),odom_quat,current_time,"base_link","odom")
+		self.odom_broadcaster.sendTransform((self.odom.pose.pose.position.x, self.odom.pose.pose.position.y, 0.),odom_quat,current_time,"base_link","vesc_odom")
 
 
 		self.odom.header.stamp=current_time

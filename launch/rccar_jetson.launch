@@ -44,7 +44,7 @@
 
 <!-- VESC to odom node -->
 	<node pkg="rccar" name="vesc_to_odom_node" type="vesc_to_odom.py" output="screen"> 
-		<remap from="/odom" to="/vesc/odom"/>
+		<!--<remap from="/odom" to="/vesc/odom"/>-->
 	</node>
 
 
