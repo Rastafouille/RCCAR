@@ -9,7 +9,7 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 
 def OdomCallback(data):
-    odom_quat = tf.transformations.quaternion_from_euler(0, 0, -data.pose.pose.orientation.z)
+    odom_quat = tf.transformations.quaternion_from_euler(0, 0, data.pose.pose.orientation.z)
     odom_broadcaster.sendTransform((data.pose.pose.position.x, -data.pose.pose.position.y, 0.),odom_quat,data.header.stamp,"base_link","odom")
 
 rospy.init_node('odometry_publisher_node')
