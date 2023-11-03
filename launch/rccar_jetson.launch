@@ -7,36 +7,36 @@
 
 <!--Robot Model-->
 	  <!-- group for racecar -->
-	  <group ns="racecar">
+	<group ns="racecar">
 	  <!--<param name="tf_prefix" value="racecar"/>-->
-	  <param name="robot_description" command="xacro --inorder '$(find rccar)/description/racecar_fixed_wheel.xacro'"/>
+	<param name="robot_description" command="xacro --inorder '$(find rccar)/description/racecar_fixed_wheel.xacro'"/>
 	  <!-- Add the transformations -->
-	  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-	  </group>
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	</group>
 
 <!-- LIDAR -->
-	    <node name="urg_node" pkg="urg_node" type="urg_node">
+	<node name="urg_node" pkg="urg_node" type="urg_node">
 		    <param name="ip_address" value="10.42.0.18"/>
 		    <param name="range_min" value="0.25"/>
-	    </node>
+	</node>
 
 <!-- VESC driver node -->
 
-	  <rosparam file="$(find rccar)/config/vesc.yaml" command="load" />
+	<rosparam file="$(find rccar)/config/vesc.yaml" command="load" />
 	  <!-- Optionally launch in GDB, for debugging -->
-	  <arg name="debug" default="false" />
-	  <arg if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args" />
-	  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+	<arg name="debug" default="false" />
+	<arg if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args" />
+	<arg unless="$(arg debug)" name="launch_prefix" value="" />
 	  
-	  <node pkg="vesc_driver" type="vesc_driver_node" name="vesc_driver_node"
+	<node pkg="vesc_driver" type="vesc_driver_node" name="vesc_driver_node"
 		output="screen" launch-prefix="$(arg launch_prefix)" >
 	    	<param name="port" value="/dev/ttyACM0" />
-	  </node>
+	</node>
 
 <!-- Ackermann to VESC node -->
-	  <node pkg="vesc_ackermann" type="ackermann_to_vesc_node" name="ackermann_to_vesc_node"
+	<node pkg="vesc_ackermann" type="ackermann_to_vesc_node" name="ackermann_to_vesc_node"
 		output="screen" launch-prefix="$(arg launch_prefix)" >
-	  </node>
+	</node>
   
 <!-- RVIZ plugins -->
 	<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen">
@@ -67,5 +67,10 @@
 	    <remap from="accel/filtered" to=""/>
 	    -->
 	</node>
+	
+<!-- GMAPPING SLAM -->
+	<node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
+		<param name="scan" value="scan" />
+	</node>-->
 
 </launch>
