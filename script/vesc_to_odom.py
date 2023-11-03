@@ -35,7 +35,7 @@ class vesc_to_odom:
 		self.last_state=VescStateStamped()
 		self.last_time=rospy.Time.now()
 
-		self.odom_pub = rospy.Publisher("vesc_odom", Odometry, queue_size=1)
+		self.odom_pub = rospy.Publisher("vesc/odom", Odometry, queue_size=1)
 		rospy.Subscriber('/sensors/core', VescStateStamped,self.StateCallback,queue_size=1)
 		rospy.Subscriber('/sensors/servo_position_command', Float64,self.ServoCallback,queue_size=1)
 		
