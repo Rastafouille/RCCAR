@@ -1,71 +1,62 @@
 <?xml version="1.0" ?>
-<!-- RC Car LAUNCH -->
+
 <launch>
 
+<!-- script bash -->
+	<node pkg="rccar" type="jetson.sh" name="jetson_script" output="screen" />
 
-<!-- script pour ouvrir la page web du stream motion -->
-<node pkg="rccar" type="jetson.sh" name="jetson_script" output="screen" />
+<!--Robot Model-->
+	  <!-- group for racecar -->
+	  <group ns="racecar">
+	  <!--<param name="tf_prefix" value="racecar"/>-->
+	  <param name="robot_description" command="xacro --inorder '$(find rccar)/description/racecar_fixed_wheel.xacro'"/>
+	  <!-- Add the transformations -->
+	  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+	  </group>
 
-  <!-- group for racecar -->
-  <group ns="racecar">
-  <!-- Open the model file -->
-  <arg name="racecar_xacro" default="$(find rccar)/description/racecar_fixed_wheel.xacro"/>
-  <!--<param name="tf_prefix" value="racecar"/>-->
-  <param name="robot_description" command="xacro --inorder '$(arg racecar_xacro)'"/>
-  <!-- Add the transformations -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-  </group>
+<!-- LIDAR -->
+	    <node name="urg_node" pkg="urg_node" type="urg_node">
+		    <param name="ip_address" value="10.42.0.18"/>
+		    <param name="range_min" value="0.25"/>
+	    </node>
 
-<arg name="sensors_config"
-       default="$(find rccar)/config/vesc.yaml" />
-  <rosparam file="$(arg sensors_config)" command="load" />
+<!-- VESC driver node -->
 
-<!-- Start urg_node on rover-explorer -->
-  <node name="urg_node" pkg="urg_node" type="urg_node">
-    <param name="ip_address" value="10.42.0.18"/>
-    <param name="range_min" value="0.25"/>
-     </node>
+	  <rosparam file="$(find rccar)/config/vesc.yaml" command="load" />
+	  <!-- Optionally launch in GDB, for debugging -->
+	  <arg name="debug" default="false" />
+	  <arg if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args" />
+	  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+	  
+	  <node pkg="vesc_driver" type="vesc_driver_node" name="vesc_driver_node"
+		output="screen" launch-prefix="$(arg launch_prefix)" >
+	    	<param name="port" value="/dev/ttyACM0" />
+	  </node>
 
+<!-- Ackermann to VESC node -->
+	  <node pkg="vesc_ackermann" type="ackermann_to_vesc_node" name="ackermann_to_vesc_node"
+		output="screen" launch-prefix="$(arg launch_prefix)" >
+	  </node>
   
-  <arg name="node_name" default="vesc_driver_node" />
-  <!-- Optionally launch in GDB, for debugging -->
-  <arg name="debug" default="false" />
-  <arg if="$(arg debug)" name="launch_prefix" value="xterm -e gdb --args" />
-  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+<!-- RVIZ plugins -->
+	<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen">
+	</node>
 
-  <!-- VESC driver parameters -->
-  <arg name="port" default="/dev/ttyACM0" />
-
-  <!-- VESC driver node -->
-  <node pkg="vesc_driver" type="vesc_driver_node" name="$(arg node_name)"
-        output="screen" launch-prefix="$(arg launch_prefix)" >
-    <param name="port" value="$(arg port)" />
-  </node>
-
- <!-- Ackermann to VESC node -->
-  <node pkg="vesc_ackermann" type="ackermann_to_vesc_node" name="ackermann_to_vesc_node"
-        output="screen" launch-prefix="$(arg launch_prefix)" >
-  </node>
-  
- <!-- VESC to Odom node 
-  <node pkg="vesc_ackermann" type="vesc_to_odom_node" name="vesc_to_odom_node"
-        output="screen" launch-prefix="$(arg launch_prefix)" >
-  </node> -->
-  
-<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen"></node>
-
-<node pkg="rccar" name="vesc_to_odom_node" type="vesc_to_odom.py" output="screen"> </node>
-
-<node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
-    <param name="video_device" value="/dev/video0" />
-    <param name="image_width" value="640" />
-    <param name="image_height" value="480" />
-    <param name="pixel_format" value="yuyv" />
-    <param name="color_format" value="yuv422p" />
-    <param name="camera_frame_id" value="usb_cam" />
-    <param name="io_method" value="mmap"/>
-  </node>
+<!-- VESC to odom node -->
+	<node pkg="rccar" name="vesc_to_odom_node" type="vesc_to_odom.py" output="screen"> 
+		<remap from="/odom" to="/vesc/odom"/>
+	</node>
 
 
+<!-- USB CAM -->
+	<node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+	    <param name="video_device" value="/dev/video0" />
+	    <param name="image_width" value="640" />
+	    <param name="image_height" value="480" />
+	    <param name="pixel_format" value="yuyv" />
+	    <param name="color_format" value="yuv422p" />
+	    <param name="camera_frame_id" value="usb_cam" />
+	    <param name="io_method" value="mmap"/>
+	</node>
 
 </launch>
