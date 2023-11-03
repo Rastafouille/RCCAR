@@ -54,7 +54,7 @@
   
 <node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay.py" output="screen"></node>
 
-<!--  <node pkg="rccar" name="odometry_publisher_node" type="tf_odom.py" output="screen"> </node>  -->
+<node pkg="rccar" name="vesc_to_odom_node" type="vesc_to_odom.py" output="screen"> </node>
 
 <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
     <param name="video_device" value="/dev/video0" />
