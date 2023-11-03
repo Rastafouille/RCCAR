@@ -73,7 +73,7 @@ class vesc_to_odom:
 		rospy.init_node('vesc_to_odom_node2')
 		self.gear_ratio=86/27
 		self.wheel_diameter=0.088
-		self.angle_ratio =55*2*math.pi/360
+		self.angle_ratio =30*2*math.pi/360
 		self.nbre_pole_moteur=4
 		self.wheelbase=0.3
 		self.speed_to_erpm_gain=rospy.get_param("/speed_to_erpm_gain")
@@ -104,7 +104,7 @@ class vesc_to_odom:
 
 	def servo_to_angle(self,servo):
 		angle=(servo-self.steering_angle_to_servo_offset)/self.steering_angle_to_servo_gain*self.angle_ratio
-		print('angle=',angle)
+		print('angle=',angle*180/math.pi)
 		return angle 
 
 
@@ -116,22 +116,22 @@ class vesc_to_odom:
 		print('current_speed=',current_speed)
 		current_angular_velocity = current_speed * math.tan(self.servo_to_angle(self.last_servo_position)) / self.wheelbase
 		print('current_angular_velocity=',current_angular_velocity)
-		yaw= current_angular_velocity*dt.to_sec()
-		print('yaw=',yaw)
-		x_dot = current_speed*math.cos(yaw)
-		y_dot = current_speed *math.sin(yaw)
+		self.theta+= current_angular_velocity*dt.to_sec()
+		print('theta=',self.theta)
+		x_dot = current_speed*math.cos(self.theta)
+		y_dot = current_speed *math.sin(self.theta)
 		x=x_dot*dt.to_sec()
 		y=y_dot*dt.to_sec()
 		self.odom.pose.pose.position.x += x
 		self.odom.pose.pose.position.y += y
 		self.odom.pose.pose.orientation.x = 0.0
 		self.odom.pose.pose.orientation.y = 0.0
-		self.odom.pose.pose.orientation.z += math.sin(yaw)# / 2.0)
-		self.odom.pose.pose.orientation.w += math.cos(yaw)# / 2.0)
+		self.odom.pose.pose.orientation.z = math.sin(self.theta / 2.0)
+		self.odom.pose.pose.orientation.w = math.cos(self.theta/ 2.0)
 			#tolerance
 		self.odom.pose.covariance[0]=0.2  #x
 		self.odom.pose.covariance[7]=0.2  #y
-		self.odom.pose.covariance[35]=0.4  #yaw
+		self.odom.pose.covariance[35]=0.4  #theta
 			#Vitesse
 		self.odom.twist.twist.linear.x = current_speed
 		self.odom.twist.twist.linear.y = 0.0
