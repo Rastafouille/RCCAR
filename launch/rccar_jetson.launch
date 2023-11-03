@@ -71,6 +71,7 @@
 <!-- GMAPPING SLAM -->
 	<node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
 		<param name="scan" value="scan" />
+		<param name="odom_frame" value="odom_combined" />
 	</node>-->
 
 </launch>
