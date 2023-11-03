@@ -15,7 +15,7 @@ from ackermann_msgs.msg import AckermannDriveStamped, AckermannDrive
 class joy_to_ackermann:
     def __init__(self):
         rospy.init_node('joy_to_ackermann_node')
-        self.drive_pub = rospy.Publisher('/drive', AckermannDriveStamped,queue_size = 1)
+        self.drive_pub = rospy.Publisher('/ackermann_cmd', AckermannDriveStamped,queue_size = 1)
         rospy.Subscriber('/joy', Joy, self.JoyCallback, queue_size = 1)
 
         self.joy_speed_axis=rospy.get_param("/joy_to_ackermann/joy_speed_axis")
