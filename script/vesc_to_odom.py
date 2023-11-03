@@ -11,63 +11,6 @@ from geometry_msgs.msg import Point, Pose, Quaternion, Twist, Vector3
 from vesc_msgs.msg import VescStateStamped
 from std_msgs.msg import Float64
 
-#Odometry
-# std_msgs/Header header
-#   uint32 seq
-#   time stamp
-#   string frame_id
-# string child_frame_id
-# geometry_msgs/PoseWithCovariance pose
-#   geometry_msgs/Pose pose
-#     geometry_msgs/Point position
-#       float64 x
-#       float64 y
-#       float64 z
-#     geometry_msgs/Quaternion orientation
-#       float64 x
-#       float64 y
-#       float64 z
-#       float64 w
-#   float64[36] covariance
-# geometry_msgs/TwistWithCovariance twist
-#   geometry_msgs/Twist twist
-#     geometry_msgs/Vector3 linear
-#       float64 x
-#       float64 y
-#       float64 z
-#     geometry_msgs/Vector3 angular
-#       float64 x
-#       float64 y
-#       float64 z
-#   float64[36] covariance
-
-# VESC State
-# std_msgs/Header header
-#   uint32 seq
-#   time stamp
-#   string frame_id
-# vesc_msgs/VescState state
-#   int32 FAULT_CODE_NONE=0
-#   int32 FAULT_CODE_OVER_VOLTAGE=1
-#   int32 FAULT_CODE_UNDER_VOLTAGE=2
-#   int32 FAULT_CODE_DRV8302=3
-#   int32 FAULT_CODE_ABS_OVER_CURRENT=4
-#   int32 FAULT_CODE_OVER_TEMP_FET=5
-#   int32 FAULT_CODE_OVER_TEMP_MOTOR=6
-#   float64 voltage_input
-#   float64 temperature_pcb
-#   float64 current_motor
-#   float64 current_input
-#   float64 speed
-#   float64 duty_cycle
-#   float64 charge_drawn
-#   float64 charge_regen
-#   float64 energy_drawn
-#   float64 energy_regen
-#   float64 displacement
-#   float64 distance_traveled
-#   int32 fault_code
-
 class vesc_to_odom:
 	def __init__(self):
 		rospy.init_node('vesc_to_odom_node2')
@@ -105,7 +48,7 @@ class vesc_to_odom:
 
 	def servo_to_angle(self,servo):
 		angle=(servo-self.steering_angle_to_servo_offset)/self.steering_angle_to_servo_gain*self.angle_ratio
-		print('angle=',angle*180/math.pi)
+		#print('angle=',angle*180/math.pi)
 		return angle 
 
 
@@ -116,11 +59,11 @@ class vesc_to_odom:
 		dt=data.header.stamp-self.last_time
 		#print ('dt=', dt.to_sec())
 		current_speed = self.erpm_to_speed(-data.state.speed)# - self.speed_to_erpm_offset)
-		print('current_speed=',current_speed)
+		#print('current_speed=',current_speed)
 		current_angular_velocity = current_speed * math.tan(self.servo_to_angle(self.last_servo_position))# / self.wheelbase
-		print('current_angular_velocity=',current_angular_velocity)
+		#print('current_angular_velocity=',current_angular_velocity)
 		self.theta+= current_angular_velocity*dt.to_sec()
-		print('theta=',self.theta)
+		#print('theta=',self.theta)
 		x_dot = current_speed*math.cos(self.theta)
 		y_dot = current_speed *math.sin(self.theta)
 		self.x+=x_dot*dt.to_sec()
