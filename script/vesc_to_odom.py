@@ -71,7 +71,7 @@ from std_msgs.msg import Float64
 class vesc_to_odom:
 	def __init__(self):
 		rospy.init_node('vesc_to_odom_node2')
-		self.gear_ratio=86/27
+		self.gear_ratio=64/26
 		self.wheel_diameter=0.088
 		self.angle_ratio =30*2*math.pi/360
 		self.nbre_pole_moteur=4
