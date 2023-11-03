@@ -40,7 +40,7 @@
     <origin xyz="${imu_distance_from_base_link} 0 ${ground_offset+height+imu_height}"/>
   </joint>
   
-  <link name="laser">
+  <link name="imu">
     
   </link>
 
