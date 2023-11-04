@@ -15,7 +15,7 @@ steering_angle_to_servo_offset=rospy.get_param("/steering_angle_to_servo_offset"
 
 
 def SteerCallback(data):
-	steer.data=(data.data-steering_angle_to_servo_offset)/steering_angle_to_servo_gain*(-100)
+	steer.data=(data.data-steering_angle_to_servo_offset)*(-100)
 	steer_pub.publish(steer)
 
 def SpeedCallback(data):
