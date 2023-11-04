@@ -19,18 +19,18 @@ steering_angle_to_servo_offset=rospy.get_param("/steering_angle_to_servo_offset"
 
 
 def SteerCallback(data):
-	steer.data=(data.data-steering_angle_to_servo_offset)/0.3*(-100)
+	steer.data=-100*(data.data-steering_angle_to_servo_offset)/(steering_angle_to_servo_gain*0.36)
 	steer_pub.publish(steer)
 
 def SpeedCallback(data):
 	# if data.data>=0:
 	# 	speed_percent.data=(data.data-speed_to_erpm_offset)/(speed_to_erpm_gain*joy_max_speed)*100
 	# else:
-	speed_percent.data=data.state.speed/(speed_to_erpm_gain*joy_max_speed)*100
+	speed_percent.data=-data.state.speed/(speed_to_erpm_gain*joy_max_speed)*100
 	
 	speed_percent_pub.publish(speed_percent)
 	 
-	speed.data=str(int (data.state.speed))+' RPM'
+	speed.data=str(int (-data.state.speed))+' RPM'
 	speed_pub.publish(speed)
 
 
