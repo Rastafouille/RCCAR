@@ -10,10 +10,6 @@ Panels:
         - /Odometry1/Covariance1
         - /Odometry1/Covariance1/Position1
         - /Odometry1/Covariance1/Orientation1
-        - /RPM%1
-        - /RPM1
-        - /Direction1
-        - /Imu1
       Splitter Ratio: 0.5
     Tree Height: 704
   - Class: rviz/Selection
@@ -304,6 +300,55 @@ Visualization Manager:
       Topic: /sensors/imu/raw
       Unreliable: false
       Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+        back_left_wheel:
+          Value: true
+        back_right_wheel:
+          Value: true
+        base_link:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_wheel:
+          Value: true
+        imu:
+          Value: true
+        laser:
+          Value: true
+        map:
+          Value: true
+        odom:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        map:
+          odom:
+            base_link:
+              back_left_wheel:
+                {}
+              back_right_wheel:
+                {}
+              front_left_wheel:
+                {}
+              front_right_wheel:
+                {}
+              imu:
+                {}
+              laser:
+                {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -332,7 +377,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 13.883913040161133
+      Distance: 9.166104316711426
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
