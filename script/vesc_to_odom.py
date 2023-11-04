@@ -47,7 +47,7 @@ class vesc_to_odom:
 		return speed 
 
 	def servo_to_angle(self,servo):
-		angle=(servo-self.steering_angle_to_servo_offset)/self.steering_angle_to_servo_gain*self.angle_ratio
+		angle=(servo-self.steering_angle_to_servo_offset)/self.steering_angle_to_servo_gain
 		#print('angle=',angle*180/math.pi)
 		return angle 
 
@@ -60,7 +60,7 @@ class vesc_to_odom:
 		#print ('dt=', dt.to_sec())
 		current_speed = self.erpm_to_speed(-data.state.speed)# - self.speed_to_erpm_offset)
 		#print('current_speed=',current_speed)
-		current_angular_velocity = current_speed * math.tan(self.servo_to_angle(self.last_servo_position))# / self.wheelbase
+		current_angular_velocity = current_speed * math.tan(self.servo_to_angle(self.last_servo_position))/ self.wheelbase
 		#print('current_angular_velocity=',current_angular_velocity)
 		self.theta+= current_angular_velocity*dt.to_sec()
 		#print('theta=',self.theta)
