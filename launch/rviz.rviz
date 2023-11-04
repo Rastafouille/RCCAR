@@ -10,6 +10,7 @@ Panels:
         - /Odometry1/Covariance1
         - /Odometry1/Covariance1/Position1
         - /Odometry1/Covariance1/Orientation1
+        - /RPM1
       Splitter Ratio: 0.5
     Tree Height: 704
   - Class: rviz/Selection
@@ -249,11 +250,11 @@ Visualization Manager:
       Value: true
       font: DejaVu Sans Mono
       height: 25
-      left: 70
+      left: 62
       line width: 2
       text size: 16
       top: 157
-      width: 100
+      width: 120
     - Class: jsk_rviz_plugin/PieChart
       Enabled: true
       Name: Direction
@@ -323,7 +324,7 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        odom:
+        vesc_odom:
           Value: true
       Marker Alpha: 1
       Marker Scale: 1
@@ -333,7 +334,7 @@ Visualization Manager:
       Show Names: true
       Tree:
         map:
-          odom:
+          vesc_odom:
             base_link:
               back_left_wheel:
                 {}
@@ -377,7 +378,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 9.166104316711426
+      Distance: 17.228288650512695
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -385,17 +386,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.39438438415527344
-        Y: 0.12870211899280548
-        Z: 1.2752838134765625
+        X: 5.352190017700195
+        Y: 3.5543360710144043
+        Z: 1.2739343643188477
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8153992295265198
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
-      Yaw: 2.135403633117676
+      Yaw: 1.9054025411605835
     Saved: ~
 Window Geometry:
   Displays:
