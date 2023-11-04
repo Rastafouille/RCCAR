@@ -15,7 +15,7 @@ class vesc_to_odom:
 	def __init__(self):
 		rospy.init_node('vesc_to_odom_node2')
 		self.gear_ratio=64/26
-		self.wheel_diameter=0.080
+		self.wheel_diameter=0.088
 		self.angle_ratio =40*2*math.pi/360
 		self.nbre_pole_moteur=4
 		self.wheelbase=0.27
@@ -43,7 +43,7 @@ class vesc_to_odom:
 
 
 	def erpm_to_speed(self,erpm):
-		speed=erpm/self.nbre_pole_moteur*2*(2*math.pi*self.wheel_diameter/2)/self.gear_ratio/60
+		speed=erpm/self.speed_to_erpm_gain
 		return speed 
 
 	def servo_to_angle(self,servo):
@@ -89,7 +89,7 @@ class vesc_to_odom:
 		# self.odom.twist.twist.angular.z = current_angular_velocity
 
 		odom_quat = tf.transformations.quaternion_from_euler(0, 0, self.theta)
-		#self.odom_broadcaster.sendTransform((self.odom.pose.pose.position.x, self.odom.pose.pose.position.y, 0.),odom_quat,current_time,"base_link","vesc_odom")
+		self.odom_broadcaster.sendTransform((self.odom.pose.pose.position.x, self.odom.pose.pose.position.y, 0.),odom_quat,current_time,"base_link","vesc_odom")
 
 
 		self.odom.header.stamp=current_time
