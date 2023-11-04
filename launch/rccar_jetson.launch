@@ -63,15 +63,15 @@
 	<node pkg="robot_localization" type="ekf_localization_node" name="ekf_localisation_node" clear_params="true">
     	<rosparam command="load" file="$(find rccar)/config/ekf.yaml" />
 	      Placeholder for output topic remapping
-	    <remap from="ekf/odomodometry" to=""/>
-	    <remap from="ekf/accel" to=""/>
+	    <remap from="odometry/filtered" to="ekf/odom"/>
+	    <remap from="accel/filtered" to="ekf/accel"/>
 	    
 	</node> -->
 	
 <!-- GMAPPING SLAM -->
 	<node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
 		<param name="scan" value="scan" />
-		<param name="odom_frame" value="ekf/odomodometry" />
+		<param name="odom_frame" value="ekf/odom" />
 	</node>
 
 </launch>
