@@ -69,7 +69,7 @@
 	</node> -->
 	
 <!-- GMAPPING SLAM -->
-	<node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
+	<!--<node pkg="gmapping" name="slam_gmapping" type="slam_gmapping">
 		<param name="scan" value="scan" />
 		<param name="odom_frame" value="vesc_odom" />
 		<param name="map_update_interval" value="2.0" />
@@ -109,6 +109,6 @@
 		    <param name="lasamplestep" value="0.005"/> 
 
 		
-	</node>
+	</node> -->
 
 </launch>
