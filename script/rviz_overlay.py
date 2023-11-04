@@ -30,7 +30,7 @@ def SpeedCallback(data):
 	
 	speed_percent_pub.publish(speed_percent)
 	 
-	speed.data=str(int (data.data))+' RPM'
+	speed.data=str(int (data.state.speed))+' RPM'
 	speed_pub.publish(speed)
 
 
