@@ -1,8 +1,8 @@
 # Joystick indices
 joy_speed_axis: 1
 joy_angle_axis: 0
-joy_max_speed: 1. # meters/second
-joy_max_angle: 1. # meters/second
+joy_max_speed: 3.0 # meters/second 3.6 km/h = 1 m/s
+joy_max_angle: 1.57 # rad 1.57rad=45°
 
 # Joystick indices for toggling mux
 joy_button_idx: 4  # L1 button
