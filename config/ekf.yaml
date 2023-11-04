@@ -3,9 +3,9 @@ sensor_timeout: 0.1
 two_d_mode: false
 
 map_frame: map
-odom_frame: vesc/odom
+odom_frame: vesc_odom
 base_link_frame: base_link
-world_frame: ekf/odom
+world_frame: ekf_odom
 
 #publish the transform from the frame specified by the world_frame parameter to the frame specified by the base_link_frame parameter.
 
