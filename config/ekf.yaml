@@ -5,7 +5,7 @@ two_d_mode: false
 map_frame: map
 odom_frame: vesc/odom
 base_link_frame: base_link
-world_frame: vesc/odom
+world_frame: ekf/odom
 
 #publish the transform from the frame specified by the world_frame parameter to the frame specified by the base_link_frame parameter.
 
