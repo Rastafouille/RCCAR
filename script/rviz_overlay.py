@@ -19,11 +19,10 @@ def SteerCallback(data):
 	steer_pub.publish(steer)
 
 def SpeedCallback(data):
-	s=(data.data-speed_to_erpm_offset)/speed_to_erpm_gain*100
-	if s>=0:
-		speed_percent.data=s
+	if data.data>=0:
+		speed_percent.data=(data.data-speed_to_erpm_offset)/speed_to_erpm_gain*100
 	else:
-		speed_percent.data=-s
+		speed_percent.data=-(data.data+speed_to_erpm_offset)/speed_to_erpm_gain*100
 	
 	speed_percent_pub.publish(speed_percent)
 	 

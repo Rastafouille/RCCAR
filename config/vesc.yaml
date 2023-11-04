@@ -1,6 +1,6 @@
 
 # erpm (electrical rpm) = speed_to_erpm_gain * speed (meters / second) + speed_to_erpm_offset
-speed_to_erpm_gain: 3000
+speed_to_erpm_gain: 2000
 speed_to_erpm_offset: 750.0
 
 # Set gains for converting acceleration to current and brake control values
