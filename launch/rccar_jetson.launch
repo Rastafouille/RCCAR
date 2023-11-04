@@ -73,7 +73,7 @@
 		<param name="scan" value="scan" />
 		<param name="odom_frame" value="vesc_odom" />
 		<param name="map_update_interval" value="2" />
-		<param name="particles" value="100" />
+		<param name="particles" value="20" />
 	</node>
 
 </launch>
