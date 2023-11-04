@@ -12,7 +12,6 @@ Panels:
         - /Odometry1/Covariance1/Orientation1
         - /RPM1
         - /Imu1
-        - /Imu1/Status1
       Splitter Ratio: 0.5
     Tree Height: 704
   - Class: rviz/Selection
@@ -380,7 +379,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 17.643978118896484
+      Distance: 360.2344665527344
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -396,9 +395,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.179796576499939
+      Pitch: 0.034797195345163345
       Target Frame: <Fixed Frame>
-      Yaw: 3.055406093597412
+      Yaw: 2.830411911010742
     Saved: ~
 Window Geometry:
   Displays:
