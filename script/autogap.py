@@ -26,8 +26,9 @@ class autogap:
 
 
 
-        self.MAX_SPEED=rospy.get_param("/autogap_node/max_speed",1)# TRR:10
-        self.MAX_STEER=rospy.get_param("/autogap_node/max_steer",1)
+        self.MAX_SPEED=rospy.get_param("/autogap_node/max_speed",3)# TRR:10
+        self.MAX_STEER=rospy.get_param("/autogap_node/max_steer",0.36)
+        self.ANGLE_COEF=rospy.get_param("/autogap_node/angle_coef",1)
 
         self.MIN_ID=rospy.get_param("/autogap_node/min_id",212) # ID du laser pris en compte
         self.MAX_ID=rospy.get_param("/autogap_node/max_id",812)
@@ -250,8 +251,8 @@ class autogap:
         #####trouver mieux que ca !!
         #print ('maxi=',maxi,' max_id=',max_id)
         if min_id!=0:
-            if min_id>max_id : max_id-=int(self.ID_DECALAGE-self.ranges[min_id]*20)
-            else : max_id+=int(self.ID_DECALAGE-self.ranges[min_id]*20)
+            if min_id>max_id : max_id-=int(self.ID_DECALAGE)#-self.ranges[min_id]*20)
+            else : max_id+=int(self.ID_DECALAGE)#-self.ranges[min_id]*20)
             #print ('collision i=',min_id, 'new max_id',max_id)
 
             col_angle = self.angle_min + (min_id * self.angle_increment)
@@ -276,11 +277,11 @@ class autogap:
         self.marker_cible_pub.publish(self.marker_cible)
 
         self.drive.header.stamp = rospy.Time.now()
-        self.drive.drive.steering_angle=self.RadianToServo(max_angle)
-        self.drive.drive.speed=self.CalculVitesse(max_angle,self.ranges[max_id])
+        self.drive.drive.steering_angle=np.clip(max_angle, -self.MAX_STEER, self.MAX_STEER)*self.ANGLE_COEF#self.RadianToServo(max_angle)
+        self.drive.drive.speed=self.CalculVitesse(self.drive.drive.steering_angle,self.ranges[max_id])
         self.drive_pub.publish(self.drive)
 
-        print(f'vitesse={self.drive.drive.speed:5.2f} angle={self.drive.drive.steering_angle:5.2f} servo={self.RadianToServo(self.drive.drive.steering_angle):5.2f}')
+        #print(f'vitesse={self.drive.drive.speed:5.2f} angle={self.drive.drive.steering_angle:5.2f} servo={self.RadianToServo(self.drive.drive.steering_angle):5.2f}')
         self.AddPointTraj()
         
         tf=time.perf_counter()

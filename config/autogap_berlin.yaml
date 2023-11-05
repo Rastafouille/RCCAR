@@ -1,0 +1,15 @@
+max_speed: 6 # vitesse maxAckermann m/s 
+max_steer: 0.36 # max en radian     
+dist_critique: 5 #berlin:5 TRR:3 # distance avant de commencer a ralentir
+dist_secu: 0.4 #distance des obstacles
+
+#Valeur max et min du laser pour le calcul de la distance max
+min_id: 256
+max_id: 768
+        
+id_decalage: 60 #berlin:50 decalage si obstacles
+distance_obst: 7 #berlin:5 TRR:1.5 #rayon des points pris en compte pour le calcul obstacle
+angle_coef: 0.95 #coef entre l'angle cible et l'angle de consigne
+
+# Joystick indices for toggling mux
+auto_button_idx: 5 # R1 button  

@@ -12,10 +12,10 @@ speed=String()
 steer=Float32()
 
 joy_max_speed=rospy.get_param("/joy_to_ackermann/joy_max_speed",3.0)
-speed_to_erpm_gain=rospy.get_param("/speed_to_erpm_gain")
-speed_to_erpm_offset=rospy.get_param("/speed_to_erpm_offset")
-steering_angle_to_servo_gain=rospy.get_param("/steering_angle_to_servo_gain")
-steering_angle_to_servo_offset=rospy.get_param("/steering_angle_to_servo_offset")
+speed_to_erpm_gain=rospy.get_param("/speed_to_erpm_gain",1580.0)
+speed_to_erpm_offset=rospy.get_param("/speed_to_erpm_offset",0.0)
+steering_angle_to_servo_gain=rospy.get_param("/steering_angle_to_servo_gain",0.85)
+steering_angle_to_servo_offset=rospy.get_param("/steering_angle_to_servo_offset",0.46)
 
 
 def SteerCallback(data):

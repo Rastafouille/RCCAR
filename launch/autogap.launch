@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <launch>
 
-    <!-- Autodrive Gap algo -->
-  <node pkg="rccar" name="autogap_node" type="autogap.py" output="screen">
-    <rosparam command="load" file="$(find rccar)/config/autogap.yaml"/>
-
-  </node>
-  
+<!-- Autodrive Gap algo -->
+	<arg name="map" default="berlin"/>
+	<node pkg="rccar" name="autogap_node" type="autogap.py" output="screen">
+	<rosparam command="load" file="$(find rccar)/config/autogap_$(arg map).yaml"/>
+	</node>
+<!-- RVIZ plugins -->
+	<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay_simu.py" output="screen">
+	</node>
+	
+	
 </launch>
