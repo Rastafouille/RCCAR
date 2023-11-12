@@ -9,6 +9,12 @@
 <!-- RVIZ plugins -->
 	<node pkg="rccar" name="rviz_overlay_node" type="rviz_overlay_simu.py" output="screen">
 	</node>
-	
+
+<!-- detection collsion -->
+	<node pkg="rccar" name="collision_detection_node" type="detection_collision.py" output="screen">
+	</node>
+<!-- laps -->
+	<node pkg="rccar" name="laps_node" type="lap_timer.py" output="screen">
+	</node>
 	
 </launch>

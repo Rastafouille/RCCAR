@@ -29,6 +29,7 @@ class autogap:
         self.MAX_SPEED=rospy.get_param("/autogap_node/max_speed",3)# TRR:10
         self.MAX_STEER=rospy.get_param("/autogap_node/max_steer",0.36)
         self.ANGLE_COEF=rospy.get_param("/autogap_node/angle_coef",1)
+        self.id_decalage_delta=rospy.get_param("/autogap_node/id_decalage_delta",20)
 
         self.MIN_ID=rospy.get_param("/autogap_node/min_id",212) # ID du laser pris en compte
         self.MAX_ID=rospy.get_param("/autogap_node/max_id",812)
@@ -211,7 +212,7 @@ class autogap:
         self.marker_cible.color.r = 0.0
         self.marker_cible.color.g = 1.0
 
-# point le plus loi en Min et Max id
+# point le plus loin entre Min et Max id
         max_id=np.argmax(self.ranges[self.MIN_ID:self.MAX_ID])+self.MIN_ID
         maxi=self.ranges[max_id]
 
@@ -251,8 +252,8 @@ class autogap:
         #####trouver mieux que ca !!
         #print ('maxi=',maxi,' max_id=',max_id)
         if min_id!=0:
-            if min_id>max_id : max_id-=int(self.ID_DECALAGE)#-self.ranges[min_id]*20)
-            else : max_id+=int(self.ID_DECALAGE)#-self.ranges[min_id]*20)
+            if min_id>max_id : max_id-=int(self.ID_DECALAGE-self.ranges[min_id]*self.id_decalage_delta)
+            else : max_id+=int(self.ID_DECALAGE-self.ranges[min_id]*self.id_decalage_delta)
             #print ('collision i=',min_id, 'new max_id',max_id)
 
             col_angle = self.angle_min + (min_id * self.angle_increment)
