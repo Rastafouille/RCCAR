@@ -1,4 +1,4 @@
-max_speed: 10 # vitesse maxAckermann m/s 
+max_speed: 9 # vitesse maxAckermann m/s 
 max_steer: 0.36 # max en radian     
 dist_critique: 1.5 # distance avant de commencer a ralentir
 dist_secu: 0.3 #distance des obstacles
